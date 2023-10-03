@@ -22,5 +22,7 @@ namespace mf_dev_backend_2023_eddy.Models
         [Required(ErrorMessage = "Obrigatório informar o Anao do Modelo")]
         [Display(Name = "Ano do Modelo")]
         public int AnoModelo { get; set; }
+
+        public ICollection<Consumo> Comsumos { get; set; }
     }
 }

@@ -80,5 +80,29 @@ namespace mf_dev_backend_2023_eddy.Controllers
 
             return View(dados);
         }
+
+        public async Task<IActionResult> Relatorio(int? id)
+        {
+
+            if (id == null)
+                return NotFound();
+
+            var veiculo = await _context.Veiculos.FindAsync(id);
+
+            if (veiculo == null)
+                return NotFound();
+
+            var consumos = await _context.Consumos
+                .Where(item => item.VeiculoId == id)
+                .OrderByDescending(item => item.Data)
+                .ToListAsync();
+            
+            float valor = consumos.Sum(item => item.Valor);
+
+            ViewBag.Veiculos = veiculo;
+            ViewBag.Valor = valor;
+
+            return View(consumos);
+        }
     }
 }

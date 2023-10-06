@@ -8,5 +8,6 @@ namespace mf_dev_backend_2023_eddy.Models
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<Veiculo> Veiculos { get; set; }
+        public DbSet<Consumo> Consumos { get; set; }
     }
 }

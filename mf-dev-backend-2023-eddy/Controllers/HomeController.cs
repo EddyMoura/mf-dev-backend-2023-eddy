@@ -15,7 +15,7 @@ namespace mf_dev_backend_2023_eddy.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Veiculos");
         }
 
         public IActionResult Privacy()

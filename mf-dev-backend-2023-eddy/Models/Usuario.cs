@@ -22,6 +22,6 @@ namespace mf_dev_backend_2023_eddy.Models
 
     public enum Perfil {
         Admin,
-        USer
+        User
     }
 }

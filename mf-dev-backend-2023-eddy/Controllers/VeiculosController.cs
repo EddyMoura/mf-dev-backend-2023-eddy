@@ -1,10 +1,12 @@
 ﻿using mf_dev_backend_2023_eddy.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol;
 
 namespace mf_dev_backend_2023_eddy.Controllers
 {
+    [Authorize]
     public class VeiculosController : Controller
     {
         private readonly AppDbContext _context;

@@ -9,9 +9,11 @@ using mf_dev_backend_2023_eddy.Models;
 using BCrypt.Net;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace mf_dev_backend_2023_eddy.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UsuariosController : Controller
     {
         private readonly AppDbContext _context;
@@ -27,12 +29,21 @@ namespace mf_dev_backend_2023_eddy.Controllers
               return View(await _context.Usuarios.ToListAsync());
         }
 
-        public async Task<IActionResult> Login()
+        [AllowAnonymous]
+        public IActionResult Login()
         {
             return View();
         }
 
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
+
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(Usuario usuario)
         {
             var dados = await _context.Usuarios
@@ -78,6 +89,7 @@ namespace mf_dev_backend_2023_eddy.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
@@ -114,7 +126,7 @@ namespace mf_dev_backend_2023_eddy.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Senha,perfil")] Usuario usuario)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Senha,Perfil")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {

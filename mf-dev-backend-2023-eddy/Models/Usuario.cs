@@ -17,7 +17,7 @@ namespace mf_dev_backend_2023_eddy.Models
         public string Senha { get; set; }
 
         [Required(ErrorMessage = "Definir")]
-        public Perfil perfil { get; set; }
+        public Perfil Perfil { get; set; }
     }
 
     public enum Perfil {
